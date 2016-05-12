@@ -38,6 +38,21 @@ $(document).ready(function() {
     $('#power-saving-status').text('off');
     thermostat.getCurrentTemperature();
   });
+
+  $('#select-city').submit(function(event) {
+    event.preventDefault();
+    var city = $('#current-city').val();
+    displayWeather(city);
+  });
+
+  function displayWeather(city) {
+    var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city;
+    var token = '&appid=bedceb2e350097bbfcff6ce2dbc503f2&units=metric';
+    var units = '&units=metric';
+    $.get(url + token + units, function(data) {
+      $('#current-temperature').text(data.main.temp);
+    });
+  }
     
 });
 
